@@ -1,14 +1,14 @@
 '''
 1.请求钩子：
-after_request    视图执行完，响应返回给浏览器之前执行
--不能截断请求，必须接收respone参数，并且返回return respone
--如果before_request截断请求，视图函数不执行，after_request会执行
+@app.after_request    视图执行完，响应返回给浏览器之前执行
+- 不能截断请求，必须接收respone参数，并且返回return respone
+- 如果before_request截断请求，视图函数不执行，after_request会执行
 
 2.基本用途：
--统一添加响应头
--统一修改Cookie，所以接口统一设置cookie
--统一日志，记录响应状态码
--统一修改返回内容
+- 统一添加响应头
+- 统一修改Cookie，所以接口统一设置cookie
+- 统一日志，记录响应状态码
+- 统一修改返回内容
 '''
 
 from flask import Flask 
