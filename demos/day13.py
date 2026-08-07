@@ -37,3 +37,51 @@
 - 视图函数可以返回最多三个元素组成的元组：响应主体，状态码，首部字段
 
 '''
+
+from flask import Flask,redirect,url_for,abort
+app = Flask(__name__)
+@app.route('/hello')
+def index():
+    return 'hello word'    # 默认状态码是200
+
+# 修改状态码
+@app.route('/hi')
+def index1():
+    return 'hi word',204
+
+# 修改状态码后，可以用Location字段设置重定向都URL
+@app.route('/baidu')
+def index2():
+    return f"go to ->baidu",302,{'Location':'http://www.baidu.com'}
+
+'''
+5. redirect函数实现重定向
+- 使用redirect实现重定向默认是302
+- 如果想修改状态可以在redirect函数的code关键字传入
+- 如果想重定向到其他视图函数可以用url_for生成目标URL  
+'''
+
+# redirect函数重定向
+@app.route('/huawei')
+def index3():
+    return redirect('https://www.huawei.com')
+
+# 模拟404跳转
+@app.route('/404')
+def index4():
+    print('no fond ！go to hello pag')
+    # redirect状态码通过code修改，重定向状态码：301~308，其他的不行
+    # url_for(视图函数名)-->得到目标视图函数的URL
+    return redirect(url_for('index'),code=301)
+
+'''
+6.错误响应
+- 正常情况下，Flask会自动常见错误响应，抛出这些异常即可返回对应的错误响应
+- abort()函数可以手动返回错误响应，只要传入状态码即可
+'''
+@app.route('/403')
+def index5():
+    abort(403)
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1',port=8080)
