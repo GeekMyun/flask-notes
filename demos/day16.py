@@ -13,13 +13,23 @@
 
 from flask import Flask,redirect,session,url_for
 app = Flask(__name__)
-
+# 设置加密解码密钥
+app.secret_key = 'my-secret'
 @app.route('/hello')
 def hello():
-    
+    return 'hello word'
 
 @app.route('/login')
 def login():
     # session对象可以向字典一样操作
     session['login_in'] = True   # 将login_in写入session，并赋值为True
     return redirect(url_for('hello'))
+
+# 获取session
+@app.route('/check')
+def check():
+    sessions = session.get('login_in')
+    return f"get session is {sessions}"
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1',port=8080)
