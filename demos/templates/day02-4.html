@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='zh=CN'>
+	<head>
+		<title>Flaskn内置上下文变量</title>
+	</head>
+	<body>
+		<h2>1.config 读取项目配置</h2>
+		<p>DEBUG模式:{{config.DEBUG}}</p>
+		<p>SECRET_KEY:{{config.SECRET_KEY}}</p>
+		<hr>
+		<h2>2.request请求对象</h2>
+		<p>完整url:{{request.ulr}}</p>
+		<p>get参数args:{{request.args}}</p>
+		<p>请求头User-Agent:{{request.headers.get('User-Agent')}}</p>
+		<p>cookies:{{request.cookies}}</p>
+		<hr>
+		<h2>3.session对象></h2>
+		<p>session里的username:{{session.username}}</p>
+		<hr>
+		<h2>4.g对象（单次请求全局）</h2>
+		<p>g中存储的用户:{{g.user}}</p>
+		<hr>
+		<h2>5.url_for()生成url</h2>
+		<a href="{{url_for('hello',name='myun')}}">带参数跳转</a>
+	</body>
+</html>
