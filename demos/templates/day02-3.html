@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+	<title>set块定义变量</title>
+</head>
+<body>
+<h3 style="color:red">set块定义变量</h3>
+{% set name='myun' %}
+{% set PL='python' %}
+<!--set 块定义一个变量test-->
+{% set test %}
+<ul>
+	<li>
+		<p>my name is {{name}}</P>
+	</li>
+	<li>
+		<p>the PL is {{PL}}</p>
+	</li>
+<ul>
+{% endset %}
+<!--调用-->
+{{test}}
+</body>
+</html>
