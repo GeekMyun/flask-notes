@@ -69,7 +69,7 @@ def index3():
 # 模拟404跳转
 @app.route('/404')
 def index4():
-    print('no fond ！go to hello pag')
+    print('no find ！go to hello pag')
     # redirect状态码通过code修改，重定向状态码：301~308，其他的不行
     # url_for(视图函数名)-->得到目标视图函数的URL
     return redirect(url_for('index'),code=301)

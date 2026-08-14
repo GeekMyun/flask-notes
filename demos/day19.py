@@ -24,7 +24,7 @@
 - set块赋值，把一大段赋值给变量，{%set value%}{%endset%}，调用{{value}}
 - 全局自定义变量app.context_processor，所有上下文自带该变量
 
-6.全局自定义变量aoo.context_processor
+6.全局自定义变量app.context_processor
 - 给所有jinja2模板注入变量，任意html模板可用
 - 函数一定要返回字典，不能return返回字符串，返回空字典{}也合法
 - 多个context_processor可以同时写，返回的字典会全部合并进模板上下文
