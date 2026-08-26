@@ -29,8 +29,31 @@ def info():
 def index():
     return render_template('day03.html')
 
+"""
+4. get_flashed_messages(with_categories,category_filter)
+- flask消息闪现的核心函数，用flash()函数传递函数
+- with_categories布尔值，默认False返回消息文本列表，True返回元组列表
+- category_filter指定要返回的消息类别
+- flash()函数
+- 消息取自session，取出来就被清空，只能读取一次
+- 必须先配置app.secret_key，否则flash()函数无法使用
+"""
+from flask import flash,get_flashed_messages
+app.secret_key='1234'
+@app.route('/set')
+def set_msg():
+    # 存入消息和消息类别
+    flash('操作成功','sucess')
+    flash('参数错误','error')
+    return redirect(url_for('get_msg'))
+@app.route('/get')
+def get_msg():
+
+
+
 @app.route('/hello')
 def hello():
     return 'hello'
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8080)
