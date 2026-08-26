@@ -73,6 +73,12 @@ def index3():
 def hello(name):
     return f"hello {name}"
 
+# 自定义全局变量
+@app.context_processor
+def processor():
+    info='hello word'
+    return dict(info=info)  # 等同于return {'info':info}
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8080)
 

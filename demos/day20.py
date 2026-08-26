@@ -1,0 +1,33 @@
+'''
+1.全局对象
+- 所有模板都可以使用的对象，包括在模板中导入的模板也可以使用
+
+2.内置全局函数
+    - 2.1 jinja2内置模板全局函数
+      - range(start,end,step)                   同python的range
+      - lipsum(n=5,html=True,min=20,max=100)    生成随机文本，可在测试时用来填充页面
+      - dict(**items)                           同python的dict
+    
+    - 2.2 flask内置模板全局函数
+      - url_for()                   用于生成URL的函数
+      - get_flashed_messages()      用于获取flash消息函数
+
+3.自定义全局函数
+- 使用app.template_global装饰器直接函数注册为全局函数，参数name可以指定一个自定义名称
+'''
+from flask import Flask,render_template
+app = Flask('__name__')
+
+# app.template_global
+@app.template_global()
+def info():
+    info_dict={'name':'tom',
+          'age':29}
+    return info_dict
+
+@app.route('/info')
+def index():
+    return render_template('day03.html')
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1',port=8080)
