@@ -18,7 +18,7 @@
 from flask import Flask,render_template
 app = Flask('__name__')
 
-# app.template_global
+# app.template_global注册的全局函数，在模板中可以直接使用
 @app.template_global()
 def info():
     info_dict={'name':'tom',
@@ -29,5 +29,8 @@ def info():
 def index():
     return render_template('day03.html')
 
+@app.route('/hello')
+def hello():
+    return 'hello'
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=8080)

@@ -5,7 +5,10 @@
 </head>
 <body>
   <div>
-<input type='butto'><a href="{{url_for('index')}}">go back</input>
+<input type='butto'><a href="{{url_for('hello')}}">go back</a></input>
+  </div>
+  <div>template_global() test：<br>
+    {{info()}}   <!--自定义的全局函数可以直接调用-->
   </div>
 </body>
 </html>
