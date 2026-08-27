@@ -38,7 +38,7 @@ def index():
 - 消息取自session，取出来就被清空，只能读取一次
 - 必须先配置app.secret_key，否则flash()函数无法使用
 """
-from flask import flash,get_flashed_messages
+from flask import flash,get_flashed_messages,redirect,url_for
 app.secret_key='1234'
 @app.route('/set')
 def set_msg():
@@ -48,7 +48,16 @@ def set_msg():
     return redirect(url_for('get_msg'))
 @app.route('/get')
 def get_msg():
-
+    # 简单文本
+    msg1 = get_flashed_messages()
+    print(f"文本类型消息->{msg1}")
+    # 获取带类型的消息
+    msg2 = get_flashed_messages(with_categories=True)
+    print(f"dict类型->{msg2}")
+    # 获取指定类型的消息
+    msg3 = get_flashed_messages(category_filter='error')
+    print(f"error->{msg3}")
+    return str(msg3)
 
 
 @app.route('/hello')
