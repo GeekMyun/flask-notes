@@ -43,5 +43,12 @@ if __name__ == "__main__":
 - truncate(s,length=255,killwords=False,end='..',leeway=None)       截断字符串，常用于显示文章摘要，length参数设置
   截取的长度，killwords参数设置是否截断单词，end参数设置结尾的符号
 """
+from flask import request
+@app.route('/login',method=['POST','GET'])
+def login():
+    if request.method == "POST":
+        username = request.form.get('name')
+        possword = request.form.get('possword')
+    return
 
 
