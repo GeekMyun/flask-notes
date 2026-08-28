@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jinja2测试器</title>
+</head>
+<body>
+    <p>用户消息：</p>
+    <p>姓名：{{name|default('user')}}</p>
+
+    {%if age is number%}
+    <p>年龄：{{age}}</p>
+    {% if age is adult %}
+    <p style='color:green'>已成年</p>
+    {%else%}
+    <p style='color:red'>未成年</p>
+    {%endif%}
+    {%endif%}
+</body>
+</html>

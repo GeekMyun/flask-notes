@@ -4,9 +4,30 @@
 <title>登录</title>
 </head>
 <body>
-<form>
-      <input type="text"></input>
-      <input></input>
+    <h2>用户登录</h2>
+<form action='/login' method='POST'>
+      <div style='margin-top:20px'>
+<label>username:</label>
+        <input type='text' name='username' placeholder='请输入用户名'></input>
+      </div>
+      <div style='margin-top:20px'>
+<label>password</label>
+        <input type='password' name='password' placeholder='密码不能为空'></input>
+      </div>
+  <div style='margin-top:20px'>
+<label>age:</label>
+<input type='number' name='age'></input>
+  </div>
+      <div>
+<input type='submit' value='登录'></input>
+      </div>
 </form>
+    {%with message = get_flashed_messages(with_categories=True)%}
+    {%if message %}
+      {%for cat,msg in message%}
+      <p style="color:red;">{{msg}}</p>
+      {%endfor%}
+    {%endif%}
+    {%endwith%}
 </body>
 </html>

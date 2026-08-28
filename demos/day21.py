@@ -20,8 +20,6 @@ def index(name):
 def index2(str):
     return str[::-1]
 
-if __name__ == "__main__":
-    app.run(host='127.0.0.1',port=8080)
 
 """
 2. jinja2常用内置过滤器
@@ -43,12 +41,30 @@ if __name__ == "__main__":
 - truncate(s,length=255,killwords=False,end='..',leeway=None)       截断字符串，常用于显示文章摘要，length参数设置
   截取的长度，killwords参数设置是否截断单词，end参数设置结尾的符号
 """
-from flask import request
-@app.route('/login',method=['POST','GET'])
+from flask import request,flash,redirect,request,render_template,get_flashed_messages,url_for
+app.secret_key='1234'
+@app.route('/login',methods=['POST','GET'])
 def login():
+    # 如果是POST表示表单提交数据过来了
     if request.method == "POST":
-        username = request.form.get('name')
-        possword = request.form.get('possword')
-    return
+        # 获取提交的数据，表单中要有name属性才能拿到数据
+        username = request.form.get('username')
+        password = request.form.get('password')
+        age = request.form.get('age')
+        if not username:
+            flash('username is None','error')
+            return redirect(url_for('login'))     # 返回登录界面
+        print(f"username->{username}\n,password->{password},age->{age}")
+        return f"""
+        <p>提交成功</p>
+        <p>username:{username}</p>
+        <p>password:{password}</p>
+        <p>age:{age}</p>
+        <a href='/login'>登录</a>
+        """
+    # 如果是GET请求直接去login界面
+    return render_template("day05.html")
 
+if __name__ == "__main__":
+    app.run(host='127.0.0.1',port=8080)
 
