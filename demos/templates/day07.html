@@ -3,18 +3,18 @@
 	<head>
 		<title>局部模板</title>
 		<style>
-.box{
-width:2000px;
-height:1500px;
-border:20px,solid red;
-}
 		</style>
 	</head>
 	<body>
-		<div class='box'>
-			<div class='head'>1</div>
-			<div class="center">2</div>
-			<div class="tail">3</div>
-		</div>
+			<div class='head'>
+    <h2>头</h2>  
+    </div>
+			<div class="center">
+<p>插入的内容：</p>
+      <p>{%include "day07_1.html"%}</p>
+    </div>
+			<div class="tail">
+<h2>尾</h2>
+    </div>
 	</body>
 </html>
