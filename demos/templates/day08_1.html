@@ -1,0 +1,7 @@
+{% macro input(name,type='text',placeholder='')%}
+<input name='{{name}}' type='{{type}}' placeholder='{{placeholder}}'></input>
+{% endmacro %}
+
+{%macro but(type,value)%}
+<button type="{{type}}">{{value}}</button>
+{%endmacro%}

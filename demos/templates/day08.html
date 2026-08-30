@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>宏macro的使用</title>
+</head>
+  <body>
+<!--1.定义宏,参数可设默认值-->
+    {%macro input(name,type='text',placeholder='')%}
+    <!--宏内部实现功能-->
+    <input type='{{type}}' name='{{name}}' placeholder='{{placeholder}}'></input>
+    {%endmacro%}
+
+    <div>
+<h2>宏macro的使用：</h2>
+      <div>
+        {{input('username','text','输入用户名~')}}
+      </div>
+    </div>
+
+    <!--2.外部引用宏marco-->
+    <div>
+<h2>外部引用宏macro:</h2>
+      {% from "day08_1.html" import input,but %}
+      <form>
+        {{input('text','user','请输入~')}}
+        {{but('submit','提交')}}
+      </form>
+    </div>
+
+    <div>
+<h2>另外一种调入：</h2>
+      {% import "day08_1.html" as mf%}
+      <form>
+        {{mf.input('password','pwd','密码不能为空~')}}
+        {{mf.but('reset','重置')}}
+      </form>
+    </div>
+
+    <div>
+<h2>call调用块：</h2>
+      {%macro box()%}
+      <div style=border:10px red>
+        {{caller()}}
+      </div>
+      {%endmacro%}
+
+      {% call box()%}
+      <p>hello world!</p>
+      {%endcall%}
+    </div>
+  </body>
+</html>
