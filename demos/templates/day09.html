@@ -3,25 +3,60 @@
 <head>
   <title>模板继承</title>
     <style>
-    .box{
-    width:800px;
-    height:500px;
-    background-image:url("{{url_for('static',filename='images/background.png')}}");
-    text-align:center;
-    background-size:cover
+.box{
+width:800px;
+height:650px;
+background-image:url("{{url_for('static',filename='images/background.png')}}");
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+      body{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+      }
+      .center{
+        background-color:white;
+        box-shadow:2px 2px 4px rgba(0,0,0,0.3);
+        border-radius:12px;
+        margin:5px;
+        padding:5px;
+      }
+      ul{
+        list-style:none;
+        padding:0;
+        margin:0;
+        display:flex;
+        gap:20px;
+      }
+    .head{
+    color:white;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.3)
+    }
+    .foot{
+    color:white;
     }
     </style>
   </head>
   <body>
     <div class='box'>
 <div class='head'>
-<p>导航栏</p>
+<ul>
+<li>自强</li>
+<li>明主</li>
+<li>独立</li>
+</ul>
     </div>
-    <div class='centers'>
-      {%block centers%}{%endblock centers%}
+    <div class='center'>
+      {%block center%}{%endblock center%}
     </div>
     <div class='foot'>
-      <p>页尾</p>
+      <label>电话：123456789</label><br>
+      <label>邮箱：12313@qq.com</label><br>
+      <label>地址：深圳</label><br>
     </div>
     </div>
   </body>

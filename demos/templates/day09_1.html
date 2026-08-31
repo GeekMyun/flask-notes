@@ -1,0 +1,40 @@
+{%extends "day09.html"%}
+{%block center%}
+<form action='/login' method=["POST"]>
+<label for="username" value='name'>账号：</label>
+  <input type='text' name="username" id="username" placeholder="请输入~"></input><br>
+<label>密码：
+<input type="password" name="pwd"></input>
+  </label> <br>
+<label>数字：
+<input type="number"></input>
+</label><br>
+<label>日期：
+<input type="date"></input>
+</label><br>
+<label>单选框：
+<input type="radio" value="man" checked name="sex">男</input>
+<input type="radio" value="woman" name="sex">女</input>
+</label><br>
+<label>复选框：
+<input type="checkbox" value="game" name="hobby">game</input>
+<input type="checkbox" value="read" name="hobby">read</input>
+<input type="checkbox" value="run" name="hobby">run</input>
+</label><br>
+<label>邮箱：
+  <input type="email" name="email"></input>
+</label><br>
+<label>文件：
+  <input type="file" name="file"></input>
+</label><br>
+<label>普通按钮：
+  <input type="button" value="but"></input>
+</label><br>
+<label>提交：
+<input type="submit" value="sub"></input>
+</label><br>
+<label>重置：
+<input type="reset" value="reset"></input>
+</label>
+</form>
+{%endblock center%}

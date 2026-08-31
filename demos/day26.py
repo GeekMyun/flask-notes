@@ -18,9 +18,13 @@
 """
 from flask import Flask,render_template
 app = Flask(__name__)
-@app.route('/index')
+@app.route('/index/pag1')
 def index():
-    return render_template('day09.html')
+    return render_template('day09_1.html')
+
+@app.route('/index/pag2')
+def index1():
+    return render_template('day09_2.html')
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1',port=8080)
