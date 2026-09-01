@@ -8,8 +8,6 @@ WTForm表单
 - 实例化表单类就可以实现html的转换
 - 通过label渲染我们需要的表单
 """
-from flask import Flask
-app = Flask(__name__)
 
 """
 2.常用的WTF字段
@@ -29,12 +27,20 @@ app = Flask(__name__)
 - TextAreaField         多行文本字段                                <textarea></textarea>
 """
 
+"""
+2.1.字段格式
+- 完整格式：字段名(label,validators=[校验器1,校验器2],**kwargs)
+- label             表单显示的文字(form.xxx.label输出)，可以传字符串，也可以不写“”
+-validators=[]      校验器列表，做后端校验，也可以为空列表[]
+- **kwargs          额外参数，id,clss,value等属性，用render_kw={}添加需要的属性
+"""
+
 """导入Form和常用的字段"""
 from wtforms import Form,StringField,PasswordField,BooleanField,SubmitField
 
 """
 3.采用的WTF校验器(validator)
-- DataRquired(message=None)                         验证数据是否有效
+- DataRequired(message=None)                         验证数据是否有效
 - Email(message=None)                               验证Email地址
 - EqualTo(fieldname,message=None)                   验证两个字段值是否相同
 - InputRequired(message=None)                       验证是否有数据
@@ -48,19 +54,62 @@ from wtforms import Form,StringField,PasswordField,BooleanField,SubmitField
 """
 
 """导入常用的校验器"""
-from wtforms.validators import DataRquired,Length
+from wtforms.validators import DataRequired,Length
 from flask_wtf import FlaskForm
 
 # 创建表单类
-class baseform(FlaskForm):
+class Myform(FlaskForm):
     # message参数用来传入错误提示的消息
-    username = Form('username',validators=[DataRquired(message=u'username不能为空！')])
-    password = Form('password',validators=[DataRquired(),Length(6,12)])
-    submit = Form('submit')
+    username = StringField('username',validators=[DataRequired(message=u'username不能为空！')])
+    password = PasswordField('password',validators=[DataRequired(),Length(6,12)])
+    submit = SubmitField('submit',render_kw={'value':'sub'})
 
 """
 4.实例化字段类常用的参数
 - label             字段标签<label>的值，也就渲染后显示在输入字段前的文字
 - render_kw         一个字典，用来设置HTML标签的属性
-- validators        一个列表
+- validators        一个列表，包含一系列验证器，会在表单提交后被逐一调用验证表单数据
+- default           字符串或可调用对象，用来为字段设置默认值
 """
+
+"""
+5.输出HTML代码
+- 实例化表单，然后将实例属性转换成字符串或直接调用就可以获取表单字段对应的HTML代码
+- 字段的<label>元素的HTML代码则可以通过"form.字段名.label"的形式获取
+"""
+
+from flask import Flask
+app = Flask(__name__)
+app.secret_key="1234"
+
+"""
+6.添加属性
+- 使用render_kw添加，username=StringField(label='username',render_kw={'placeholder':'请输入～'})
+- 在调用字段时传入
+"""
+@app.route('/index')
+def index():
+    # 实例化表单,要在视图函数内实例，需要上下文
+    myform=Myform()
+    # 转化为HTML代码
+    print(f"username:{myform.username()}")
+# username:<input id="username" name="username" required type="text" value="">
+    print(f"username:{myform.username(style='width:20px',placeholder='请输入～')}")
+# username:<input id="username" name="username" placeholder="请输入～" required style="width:20px" type="text" value="">
+    print(f"password:{myform.password()}")
+# password:<input id="password" maxlength="12" minlength="6" name="password" required type="password" value="">
+    print(f"submit:{myform.submit()}")
+# submit:<input id="submit" name="submit" type="submit" value="sub">
+    
+    # 输出label
+    print(f"username:{myform.username.label()}")
+# username:<label for="username">username</label>
+    print(f"password:{myform.password.label()}")
+# password:<label for="password">password</label>
+    print(f"submit:{myform.submit.label()}")
+# submit:<label for="submit">submit</label>
+
+    return 'WTForm'
+
+if __name__ == "__main__":
+    app.run(host='127.0.0.1',port=8080)
