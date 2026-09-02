@@ -41,3 +41,37 @@
 - 一般可以直接通过字段名获取对应字段的错误消息列表(form.fieldname.errors)
 
 """
+
+from flask import Flask
+from wtforms import StringField,PasswordField,SubmitField,BooleanField,
+DateField,DateTimeField,FileField,InterField,RadioField,SelectField,TextareaField
+from flask_wtf import FlaskForm
+from wtforms.validators import DataRequired,Length,NumberRange
+
+app = Flask(__name__)
+app.secret_key="wtforms"        # CSRF保护需要设置密钥
+
+# 表单类,继承FlaskForm类
+class Forms(FlaskForm):
+    username = StringField(label='用户名',validators=[DataRequired('账号不能为空')])
+    password = PasswordField(label='密码',validators=[length(6,12)])
+    phone = InterField(label='电话',validators=[length(9,11)])
+    # RadioField和SelectField核心参数:choices=['传给后端的值','页面显示文字']
+    sex = RadioField(label='性别',choices=[('1','男'),('2','女')],default='1',validators=[DataRequired('请选择性别')])
+    home = SelectField(label='省份',choices=[('sz','深圳'),('cd','成都'),('sh','上海')],)
+    birth = DateField('出生日期')
+    date = DateTimeField('登录日期')
+    submit = SubmitField(label='提交')
+
+@app.route('/login',method=['POST','GET'])
+def login():
+
+    return
+
+
+
+
+
+
+
+
