@@ -36,7 +36,7 @@ WTForm表单
 """
 
 """导入Form和常用的字段"""
-from wtforms import Form,StringField,PasswordField,BooleanField,SubmitField
+from wtforms import StringField,PasswordField,BooleanField,SubmitField
 
 """
 3.采用的WTF校验器(validator)

@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html lang='zh-CN'>
+<head>
+<title>表单渲染</title>
+    <style>
+    .forms{
+    background-color:rgb(180,180,180);
+    margin:2px;
+    border-radius:5px;
+    width:200px;
+    height:150px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    }
+    h4{
+  text-align:center;
+    }
+    *{
+    box-sizning:border-box;
+    padding:0;
+    margin:0;
+    }
+    </style>
+</head>
+<body>
+<h2>渲染的表单</h2>
+<div class='forms'>
+<form method='POST'>
+        {{forms.csrf_token}}   <!--渲染CSRF令牌隐藏字段-->
+        <!--csrf_token包含了自动生成的CSRF令牌值，提交成功后还会自动被校验-->
+        <h4>登录</h4>
+        {{forms.username.label}}:
+        {{forms.username}}<br>
+        {{forms.password.label}}:
+        {{forms.password}}<br>
+        {{forms.submit.label}}
+        {{forms.submit}}<br>
+</form>
+</div>
+</body>
+</html>

@@ -8,7 +8,7 @@
 - 为了方便代码的阅读，block块可以写成{%block son%}...{%endblock son%}
 
 3.子模板
-- 更python的继承一样，使用extend继承父模板的内容
+- 更python的继承一样，使用{%extends farther.html%}继承父模板的内容
 
 4.内容覆盖
 - 如果子模板有和同基模板同名的变量或者块，子模板会覆盖基模板
