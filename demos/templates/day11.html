@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<title>WTF表单校验</title>
+  </head>
+<body>
+<div class='login'>
+      {{form.csrf_token}}
+      {{form.username.label}}
+      {{form.username}}
+      {%for message in form.username.errors%}
+      <small class='error'>{{message}}</small>
+      {%endfor%}<br>
+      
+      {{form.password.label}}
+      {{form.password}}
+      {%for message in form.password.errors%}
+      <small class='error'>{{message}}</small>   <!--渲染错误消息-->
+      {%endfor%}<br>
+
+      {{form.age.label}}
+      {{form.age}}
+      <small class='error'>{{form.age.errors}}</small><br>
+
+      {{form.sex.label}}
+      {{form.sex}}<br>
+
+      {{form.home.label}}
+      {{form.home}}<br>
+
+      {{form.birth.label}}
+      {{form.birth}}<br>
+
+      <!-- {{form.data.label}}
+      {{form.data}}<br> -->
+
+      {{form.area.label}}
+      {{form.area}}<br>
+
+      {{form.submit.label}}
+      {{form.submit}}<br>
+</div>
+  </body>
+</html>

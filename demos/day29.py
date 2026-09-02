@@ -42,9 +42,9 @@
 
 """
 
-from flask import Flask
-from wtforms import StringField,PasswordField,SubmitField,BooleanField,
-DateField,DateTimeField,FileField,InterField,RadioField,SelectField,TextareaField
+from flask import Flask,request,render_template,redirect,url_for
+from wtforms import (StringField,PasswordField,SubmitField,BooleanField
+,DateField,DateTimeField,FileField,IntegerField,RadioField,SelectField,TextAreaField)
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired,Length,NumberRange
 
@@ -53,20 +53,38 @@ app.secret_key="wtforms"        # CSRF保护需要设置密钥
 
 # 表单类,继承FlaskForm类
 class Forms(FlaskForm):
-    username = StringField(label='用户名',validators=[DataRequired('账号不能为空')])
-    password = PasswordField(label='密码',validators=[length(6,12)])
-    phone = InterField(label='电话',validators=[length(9,11)])
+    username = StringField(label='用户名',validators=[DataRequired('账号不能为空')],render_kw={'placeholder':'请输入~'})
+    password = PasswordField(label='密码',validators=[Length(6,12)])
+    age = IntegerField(label='年龄',validators=[Length(9,11)])
     # RadioField和SelectField核心参数:choices=['传给后端的值','页面显示文字']
     sex = RadioField(label='性别',choices=[('1','男'),('2','女')],default='1',validators=[DataRequired('请选择性别')])
     home = SelectField(label='省份',choices=[('sz','深圳'),('cd','成都'),('sh','上海')],)
     birth = DateField('出生日期')
     date = DateTimeField('登录日期')
     submit = SubmitField(label='提交')
+    area = TextAreaField(label='个性签名')
 
-@app.route('/login',method=['POST','GET'])
+@app.route('/login',methods=['POST','GET'])
 def login():
+    form = Forms()
+    if request.method =="POST" and form.data.validate():  # 验证表单
+        redirect(url_for('index'))
+    return render_template('day11.html',form=form)
 
-    return
+# 使用form.validate_on_submit()验证表单数据
+@app.route('/login1',methods=['POST','GET'])
+def login1():
+    form = Forms()
+    if form.validate_on_submit():
+        redirect(url_for('index'))
+    return render_template('day11.html',form=form)
+
+@app.route('/index',methods=['POST','GET'])
+def index():
+    return 'hello word'
+
+if __name__ == "__main__":
+    app.run(host='127.0.0.1',port=8080)
 
 
 
