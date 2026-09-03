@@ -2,9 +2,35 @@
 <html lang='zh-CN'>
 <head>
 <title>WTF表单校验</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+      body{
+        width:800px;
+        height:600px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background-image:url("{{url_for('static',filename='/images/background.png')}}");
+        background-repeat:no-repeat;
+        background-size:cover;
+        background-position:center,center;
+      }
+      .login{
+        background-color:rgb(245,245,245);
+        margin:5px;
+        border-radius:5px;
+        box-shadow:2px 2px 1px rgb(200,200,200);
+        text-align:left;
+      }
+</style>
   </head>
 <body>
 <div class='login'>
+  <form action='/index' methods=['PSOT']>
       {{form.csrf_token}}
       {{form.username.label}}
       {{form.username}}
@@ -31,14 +57,12 @@
       {{form.birth.label}}
       {{form.birth}}<br>
 
-      <!-- {{form.data.label}}
-      {{form.data}}<br> -->
-
       {{form.area.label}}
       {{form.area}}<br>
 
       {{form.submit.label}}
       {{form.submit}}<br>
+      </form>
 </div>
   </body>
 </html>
