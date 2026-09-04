@@ -44,7 +44,7 @@
 
 from flask import Flask,request,render_template,redirect,url_for
 from wtforms import (StringField,PasswordField,SubmitField,BooleanField
-,DateField,DateTimeField,FileField,IntegerField,RadioField,SelectField,TextAreaField)
+,DateField,FileField,IntegerField,RadioField,SelectField,TextAreaField)
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired,Length,NumberRange
 
@@ -60,7 +60,6 @@ class Forms(FlaskForm):
     sex = RadioField(label='性别',choices=[('1','男'),('2','女')],default='1',validators=[DataRequired('请选择性别')])
     home = SelectField(label='省份',choices=[('sz','深圳'),('cd','成都'),('sh','上海')],)
     birth = DateField('出生日期')
-    date = DateTimeField('登录日期')
     submit = SubmitField(label='提交')
     area = TextAreaField(label='个性签名')
 
