@@ -12,25 +12,34 @@ from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.secret_key='forms'
-app.config['WTF_l18N_ENABLED'] = False
+app.config['WTF_I18N_ENABLED'] = False
 
 class mybaseform(FlaskForm):
     class Meta:
-        locales:['zh']    # 简体中文zh,繁体中文zh_wtf
+        locales=['zh']    # 简体中文zh,繁体中文zh_wtf
 
 class myform(mybaseform):
-    nusername = StringField(label='用户名',validators=[DataRequired()],render_kw={'placeholder':'请输入~'})
+    username = StringField(label='用户名',validators=[DataRequired()],render_kw={'placeholder':'请输入~'})
     submit = SubmitField(label='提交')
 
+# 正常meta设置locales修改错误消息语言
 @app.route('/index',methods=["POST","GET"])
 def index():
     form = myform()
+    if forms.validate_on_submit():  # 验证表单
+        redirect(url_for('hello'))
+    return render_template("day12.html",form=form)
+
+# 在实例化表单时通过meta关键字传入locales值设置错误消息语言
+@app.route('/index1',methods=["POST","GET"])
+def index1():
+    form = myform(meta={'locales':['zh']})
     if form.validate() and request.method=="POST":
         redirect(url_for('hello'))
     return render_template('day12.html',form=form)
 
 @app.route('/hello')
-def index1():
+def index2():
     return "提交成功！"
 
 if __name__ == "__main__":
