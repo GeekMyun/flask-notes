@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='zh'>
+<head>
+<title>自定义校验器</title>
+    <style>
+    .info{
+    background-color:rgb(158,185,158);
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    }
+    </style>
+</head>
+  <body>
+<div class='info'>
+<form action='' method='POST'>
+        {{form.csrf_token}}
+        {{form.name.label}}
+        {{form.name}}
+        <small class='error'>{{form.name.errors}}</small><br>
+        {{form.age.label}}
+        {{form.age}}
+        <small class='error'>{{form.age.errors}}</small><br>
+        {{form.age1.label}}
+        {{form.age1}}
+        <small class='error'>{{form.age1.errors}}</small><br>
+        {{form.submit.label}}
+        {{form.submit}}
+    </div>
+  </body>
+</html>
