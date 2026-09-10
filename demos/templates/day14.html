@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>文件上传</title>
+	<style>
+
+	</style>
+</head>
+<body>
+	<div class="file">
+		<form action="" method="POST" enctype="multipart/form-data">
+			<div class="part1">
+				<h4>表单文件上传</h4>
+			{{forms.csrf_token}}
+			{{forms.file.label}}
+			{{forms.file}}
+			{{forms.file.erros}}<br>
+			{{forms.submit.label}}
+			{{forms.submit}}
+			</div>
+		<!--	<div class="part2">
+				<h4>html文件上传</h4>
+				<input type="file" action='',method="POST" name='photo' accept=".jpg,.png,gif"></input>
+				<input type="submit" value="提交"></input>
+		</div>-->
+		</form>
+	</div>
+</body>
+</html>
