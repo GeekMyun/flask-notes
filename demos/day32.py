@@ -32,7 +32,7 @@
 - 上传给服务器的文件，需要创建一个保存文件的目录，并将绝对路径配置到自定义变量中
 - 调用save()方法保存文件,save(path,file)
 """
-from flask import Flask,redirect,url_for,render_template,request,flash
+from flask import Flask,redirect,url_for,render_template,request,flash,send_from_directory
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
 from wtforms.validators import ValidationError
@@ -66,19 +66,19 @@ def index():
         # 保存文件
         f.save(os.path.join(app.config['FILE_PATH'],filename))
         flash('file upload sucess')
-        return redirect(url_for('show'))
+        return redirect(url_for('show',filename=filename))
     return render_template("day14.html",forms=forms)
 
 # 提供send_from_directory获取上传文件的URL
 @app.route('/home/<path:filename>',methods=["GET","POST"])
 def get_file(filename):
     return send_from_directory(app.config['FILE_PATH'],filename)
-    return "文件上传成功！"
 
 # 显示上传的文件
-@app.route('/show')
+@app.route('/show',methods=["GET","POST"])
 def show():
-    return render_template('day14_1.html')
+    filename = request.args.get('filename')
+    return render_template('day14_1.html',filename=filename)
 
 
 if __name__ == "__main__":
