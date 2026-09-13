@@ -17,6 +17,8 @@ from flask_wtf import FlaskForm
 from flask_ckeditor.utils import cleanify
 
 app = Flask(__name__)
+app.secret_key = "flask"
+app.config['CKEDITOR_SERVE_LOCAL']=True
 # 初始化CKEditor
 ckeditor = CKEditor(app)
 class textforms(FlaskForm):
